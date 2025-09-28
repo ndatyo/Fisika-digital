@@ -1,0 +1,2915 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Pembelajaran Fisika</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        /* Enhanced Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        .bounce-in {
+            animation: bounceIn 0.8s ease-out;
+        }
+        
+        .scale-in {
+            animation: scaleIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Floating Animation */
+        .float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Gradient Backgrounds */
+        .gradient-blue {
+            background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+        }
+        
+        .gradient-green {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+        
+        .gradient-purple {
+            background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+        }
+        
+        .gradient-orange {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+        }
+        
+        .gradient-pink {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+        }
+        
+        .gradient-teal {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+        }
+        
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hover Effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transform: scale(1.02);
+        }
+        
+        /* Token Display */
+        .token-display {
+            font-family: 'Courier New', monospace;
+            font-size: 2.5rem;
+            font-weight: bold;
+            letter-spacing: 0.3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 2px;
+            animation: progress 30s linear infinite;
+        }
+        
+        @keyframes progress {
+            from { width: 100%; }
+            to { width: 0%; }
+        }
+        
+        /* Card Enhancements */
+        .card-enhanced {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .card-enhanced:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Status Indicators */
+        .status-indicator {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Navigation Enhancement */
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-item:hover::after,
+        .nav-item.active::after {
+            width: 80%;
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Enhancements */
+        @media (max-width: 768px) {
+            .token-display {
+                font-size: 1.8rem;
+                letter-spacing: 0.2em;
+            }
+        }
+        
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Welcome Page -->
+    <div id="welcomePage" class="min-h-screen flex items-center justify-center p-4 gradient-blue">
+        <div class="text-center max-w-4xl mx-auto">
+            <!-- Main Logo and Title -->
+            <div class="mb-12 bounce-in">
+                <div class="gradient-green w-32 h-32 rounded-full flex items-center justify-center mx-auto mb-8 float hover-glow shadow-2xl">
+                    <span class="text-white text-6xl">⚛️</span>
+                </div>
+                <h1 class="text-6xl font-bold text-white mb-4 slide-up">Fisika Learning</h1>
+                <p class="text-white/90 text-2xl mb-2 slide-up">Sistem Pembelajaran Fisika Digital</p>
+                <p class="text-white/70 text-lg slide-up">Platform pembelajaran modern untuk guru dan siswa</p>
+            </div>
+            
+            <!-- Login Options -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+                <!-- Teacher Login Button -->
+                <div onclick="showLoginForm('guru')" class="glass rounded-3xl p-8 hover-lift cursor-pointer border-2 border-transparent hover:border-white/30 scale-in group">
+                    <div class="text-center">
+                        <div class="gradient-orange w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 float group-hover:scale-110 transition-all duration-300">
+                            <span class="text-white text-4xl">👨‍🏫</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-3">Login Guru</h3>
+                        <p class="text-white/80 text-lg mb-4">Kelola pembelajaran, materi, dan penilaian</p>
+                        <div class="status-indicator bg-white/30 text-white text-sm px-4 py-2 rounded-full inline-block font-semibold border border-white/40">
+                            Klik untuk masuk
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Student Login Button -->
+                <div onclick="showLoginForm('siswa')" class="glass rounded-3xl p-8 hover-lift cursor-pointer border-2 border-transparent hover:border-white/30 scale-in group" style="animation-delay: 0.2s">
+                    <div class="text-center">
+                        <div class="gradient-purple w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 float group-hover:scale-110 transition-all duration-300" style="animation-delay: 0.5s">
+                            <span class="text-white text-4xl">👨‍🎓</span>
+                        </div>
+                        <h3 class="text-3xl font-bold text-white mb-3">Login Siswa</h3>
+                        <p class="text-white/80 text-lg mb-4">Akses materi, absen, dan lihat nilai</p>
+                        <div class="status-indicator bg-white/30 text-white text-sm px-4 py-2 rounded-full inline-block font-semibold border border-white/40">
+                            Klik untuk masuk
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Preview -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto fade-in" style="animation-delay: 0.5s">
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">📚</div>
+                    <h4 class="text-white font-semibold mb-2">Materi Digital</h4>
+                    <p class="text-white/70 text-sm">PPT, Video, Modul & Latihan</p>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">📱</div>
+                    <h4 class="text-white font-semibold mb-2">Absen GPS</h4>
+                    <p class="text-white/70 text-sm">Sistem absensi berbasis lokasi</p>
+                </div>
+                <div class="glass rounded-2xl p-6 text-center">
+                    <div class="text-4xl mb-3">📊</div>
+                    <h4 class="text-white font-semibold mb-2">Penilaian</h4>
+                    <p class="text-white/70 text-sm">Kelola nilai dan laporan</p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <footer class="mt-16">
+                <div class="text-center">
+                    <p class="text-white/60 text-sm">© 2025 ndatyo. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Login Form Page -->
+    <div id="loginPage" class="hidden min-h-screen flex items-center justify-center p-4 gradient-blue">
+        <div class="glass rounded-3xl shadow-2xl p-8 w-full max-w-md bounce-in">
+            <!-- Back Button -->
+            <button onclick="backToWelcome()" class="mb-6 text-white/80 hover:text-white flex items-center text-sm hover:scale-105 transition-all duration-300">
+                ← Kembali ke halaman utama
+            </button>
+            
+            <div class="text-center mb-8">
+                <div class="gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 float hover-glow">
+                    <span class="text-white text-3xl" id="loginIcon">⚛️</span>
+                </div>
+                <h1 class="text-4xl font-bold text-white mb-3 slide-up" id="loginTitle">Login</h1>
+                <p class="text-white/80 text-lg slide-up" id="loginSubtitle">Masuk ke sistem</p>
+                
+
+            </div>
+            
+            <form id="loginForm" class="space-y-6 fade-in">
+                <div>
+                    <label class="block text-sm font-medium text-white mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-4 py-3 bg-white border-0 rounded-xl focus:ring-2 focus:ring-white focus:outline-none text-gray-900 placeholder-gray-500" placeholder="Masukkan username" required style="background-color: white !important; border: 2px solid white !important; box-shadow: none !important;">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-white mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-4 py-3 bg-white border-0 rounded-xl focus:ring-2 focus:ring-white focus:outline-none text-gray-900 placeholder-gray-500" placeholder="Masukkan password" required style="background-color: white !important; border: 2px solid white !important; box-shadow: none !important;">
+                </div>
+                
+                <input type="hidden" id="userType" value="">
+                
+                <button type="submit" class="w-full bg-white text-blue-700 hover:bg-blue-50 py-4 rounded-xl hover:scale-105 transition-all duration-300 font-bold text-lg shadow-lg hover:shadow-xl border-2 border-white">
+                    🚀 Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Teacher Dashboard -->
+    <div id="teacherDashboard" class="hidden">
+        <!-- Header -->
+        <header class="bg-blue-800 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-6">
+                    <div class="flex items-center fade-in">
+                        <div class="bg-green-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 float">
+                            <span class="text-white text-xl">⚛️</span>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Dashboard Guru</h1>
+                            <p class="text-white text-sm">Sistem Pembelajaran Fisika</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <p class="text-white text-sm">Selamat datang,</p>
+                            <p class="text-white font-semibold" id="teacherName">Pak Guru</p>
+                        </div>
+                        <button onclick="logout()" class="bg-white/20 text-white px-6 py-3 rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30">
+                            🚪 Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-blue-700 text-white border-b border-blue-600">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-2">
+                    <button onclick="showTeacherSection('materi')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        📚 Materi
+                    </button>
+                    <button onclick="showTeacherSection('kelas')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        👥 Daftar Kelas
+                    </button>
+                    <button onclick="showTeacherSection('kehadiran')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        ✅ Kehadiran
+                    </button>
+                    <button onclick="showTeacherSection('nilai')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        📊 Nilai
+                    </button>
+                    <button onclick="showTeacherSection('jurnal')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        📝 Jurnal
+                    </button>
+                    <button onclick="showTeacherSection('pengaturan')" class="teacher-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-blue-600 transition-all duration-300 font-medium text-white">
+                        ⚙️ Pengaturan
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+            <!-- Materi Section -->
+            <div id="materiSection" class="teacher-section">
+                <!-- Class Selection View -->
+                <div id="materiClassView">
+                    <h2 class="text-2xl font-bold text-gray-900 mb-6">Pilih Kelas untuk Materi Pembelajaran</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div onclick="showMateriByClass('X')" class="card-enhanced rounded-2xl p-8 hover-lift cursor-pointer border-2 border-transparent hover:border-blue-400 slide-up">
+                            <div class="text-center">
+                                <div class="gradient-blue w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 float">
+                                    <span class="text-white text-3xl font-bold">X</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Kelas X</h3>
+                                <p class="text-gray-600 mb-4">🔬 Fisika Dasar</p>
+                                <div class="status-indicator bg-blue-100 text-blue-800 text-sm px-4 py-2 rounded-full inline-block font-semibold" id="materiCountX">0 Materi</div>
+                            </div>
+                        </div>
+                        
+                        <div onclick="showMateriByClass('XI')" class="card-enhanced rounded-2xl p-8 hover-lift cursor-pointer border-2 border-transparent hover:border-green-400 slide-up" style="animation-delay: 0.1s">
+                            <div class="text-center">
+                                <div class="gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 float" style="animation-delay: 0.5s">
+                                    <span class="text-white text-3xl font-bold">XI</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Kelas XI</h3>
+                                <p class="text-gray-600 mb-4">⚡ Fisika Lanjutan</p>
+                                <div class="status-indicator bg-green-100 text-green-800 text-sm px-4 py-2 rounded-full inline-block font-semibold" id="materiCountXI">0 Materi</div>
+                            </div>
+                        </div>
+                        
+                        <div onclick="showMateriByClass('XII')" class="card-enhanced rounded-2xl p-8 hover-lift cursor-pointer border-2 border-transparent hover:border-purple-400 slide-up" style="animation-delay: 0.2s">
+                            <div class="text-center">
+                                <div class="gradient-purple w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 float" style="animation-delay: 1s">
+                                    <span class="text-white text-3xl font-bold">XII</span>
+                                </div>
+                                <h3 class="text-2xl font-bold text-gray-800 mb-2">Kelas XII</h3>
+                                <p class="text-gray-600 mb-4">🚀 Fisika Modern</p>
+                                <div class="status-indicator bg-purple-100 text-purple-800 text-sm px-4 py-2 rounded-full inline-block font-semibold" id="materiCountXII">0 Materi</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Materi Detail View -->
+                <div id="materiDetailView" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex items-center">
+                            <button onclick="backToMateriClassView()" class="mr-4 text-blue-600 hover:text-blue-800">
+                                ← Kembali
+                            </button>
+                            <h2 class="text-2xl font-bold text-gray-900">Materi Kelas <span id="currentMateriClass"></span></h2>
+                        </div>
+                        <button onclick="showAddMateriModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                            + Tambah Materi
+                        </button>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="materiList">
+                        <!-- Materi cards will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kelas Section -->
+            <div id="kelasSection" class="teacher-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Daftar Kelas</h2>
+                    <div class="flex items-center space-x-2">
+                        <select id="kelasFilterSiswa" onchange="filterSiswaByClass()" class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Semua Kelas</option>
+                        </select>
+                        <button onclick="showAddKelasModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                            + Tambah Kelas
+                        </button>
+                        <button onclick="showImportModal()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                            📥 Import
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NISN</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="siswaList" class="bg-white divide-y divide-gray-200">
+                                <!-- Student data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kehadiran Section -->
+            <div id="kehadiranSection" class="teacher-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Kehadiran Siswa</h2>
+                    <div class="flex space-x-2">
+                        <select id="kelasFilter" class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Pilih Kelas</option>
+                        </select>
+                        <button onclick="generateToken()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200">
+                            🔑 Generate Token
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Token Display -->
+                <div class="gradient-purple text-white p-8 rounded-2xl mb-8 shadow-2xl bounce-in">
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center justify-center">
+                            🔑 Token Kehadiran Aktif
+                        </h3>
+                        <div class="glass p-6 rounded-xl mb-4">
+                            <div class="token-display text-white" id="currentToken">------</div>
+                        </div>
+                        <p class="text-lg mb-4 opacity-90">⏰ Token berubah setiap 30 detik</p>
+                        <div class="flex items-center justify-center space-x-2 mb-4">
+                            <span class="text-lg">⏳ Sisa waktu: </span>
+                            <span id="tokenTimer" class="text-3xl font-bold bg-white/20 px-4 py-2 rounded-lg">30</span>
+                            <span class="text-lg"> detik</span>
+                        </div>
+                        <div class="progress-bar mx-auto" style="width: 200px;"></div>
+                    </div>
+                </div>
+
+                <!-- Attendance Controls -->
+                <div class="bg-white p-6 rounded-lg shadow mb-6">
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <button onclick="markAllPresent()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                            ✅ Hadir Semua
+                        </button>
+                        <div class="flex space-x-2">
+                            <label class="text-sm text-gray-600 flex items-center">Dari:</label>
+                            <input type="date" id="startDate" class="px-3 py-2 border border-gray-300 rounded-lg">
+                            <label class="text-sm text-gray-600 flex items-center">Sampai:</label>
+                            <input type="date" id="endDate" class="px-3 py-2 border border-gray-300 rounded-lg">
+                            <select id="kelasFilterKehadiran" class="px-3 py-2 border border-gray-300 rounded-lg">
+                                <option value="">Semua Kelas</option>
+                            </select>
+                            <button onclick="filterAttendance()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200">
+                                🔍 Filter
+                            </button>
+                        </div>
+                        <button onclick="printAttendance()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                            🖨️ Print Rekap
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Attendance Table -->
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NISN</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendanceList" class="bg-white divide-y divide-gray-200">
+                                <!-- Attendance data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nilai Section -->
+            <div id="nilaiSection" class="teacher-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Daftar Nilai</h2>
+                    <div class="flex space-x-2">
+                        <select id="nilaiKelasFilter" class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Pilih Kelas</option>
+                        </select>
+                        <select id="jenisNilaiFilter" class="px-4 py-2 border border-gray-300 rounded-lg">
+                            <option value="">Semua Jenis</option>
+                            <option value="UH1">UH 1</option>
+                            <option value="UH2">UH 2</option>
+                            <option value="PTS">PTS</option>
+                            <option value="PAS">PAS</option>
+                        </select>
+                        <button onclick="showUploadNilaiModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                            📤 Unggah Nilai
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">NISN</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody id="nilaiList" class="bg-white divide-y divide-gray-200">
+                                <!-- Nilai data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jurnal Section -->
+            <div id="jurnalSection" class="teacher-section hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Jurnal Pembelajaran</h2>
+                    <button onclick="showAddJurnalModal()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                        + Tambah Jurnal
+                    </button>
+                </div>
+                
+                <div class="space-y-4" id="jurnalList">
+                    <!-- Jurnal entries will be populated here -->
+                </div>
+            </div>
+
+            <!-- Pengaturan Section -->
+            <div id="pengaturanSection" class="teacher-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pengaturan Website</h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Logo Settings -->
+                    <div class="card-enhanced rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            🎨 Pengaturan Logo
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Current Logo Preview -->
+                            <div class="text-center p-6 bg-gray-50 rounded-xl">
+                                <div class="gradient-green w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4" id="logoPreview">
+                                    <span class="text-white text-3xl" id="currentLogoIcon">⚛️</span>
+                                </div>
+                                <p class="text-sm text-gray-600">Logo Saat Ini</p>
+                            </div>
+                            
+                            <!-- Logo Options -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Pilih Logo:</label>
+                                <div class="grid grid-cols-4 gap-3">
+                                    <button onclick="changeLogo('⚛️')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">⚛️</button>
+                                    <button onclick="changeLogo('🔬')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">🔬</button>
+                                    <button onclick="changeLogo('📚')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">📚</button>
+                                    <button onclick="changeLogo('🎓')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">🎓</button>
+                                    <button onclick="changeLogo('⚡')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">⚡</button>
+                                    <button onclick="changeLogo('🌟')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">🌟</button>
+                                    <button onclick="changeLogo('🚀')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">🚀</button>
+                                    <button onclick="changeLogo('💡')" class="logo-option p-3 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all duration-300 text-2xl bg-white hover:bg-blue-50">💡</button>
+                                </div>
+                            </div>
+                            
+                            <!-- Custom Logo Input -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Logo Kustom (Emoji):</label>
+                                <div class="flex space-x-2">
+                                    <input type="text" id="customLogoInput" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg" placeholder="Masukkan emoji (contoh: 🔥)" maxlength="2">
+                                    <button onclick="setCustomLogo()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                                        Terapkan
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Upload Logo File -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Upload Logo (JPG, PNG, GIF):</label>
+                                <div class="space-y-3">
+                                    <input type="file" id="logoFileInput" accept="image/*" class="w-full px-4 py-2 border border-gray-300 rounded-lg" onchange="previewLogoUpload(event)">
+                                    <p class="text-xs text-gray-500">Ukuran maksimal: 2MB. Format: JPG, PNG, GIF, SVG</p>
+                                    <div id="logoUploadPreview" class="hidden">
+                                        <img id="logoPreviewImage" class="w-16 h-16 object-contain rounded-lg border" alt="Logo Preview">
+                                        <div class="mt-2 flex space-x-2">
+                                            <button onclick="applyLogoUpload()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm">
+                                                ✅ Terapkan Logo
+                                            </button>
+                                            <button onclick="cancelLogoUpload()" class="text-red-600 hover:text-red-800 text-sm">
+                                                ❌ Batal
+                                            </button>
+                                        </div>
+                                        <div id="logoAppliedPreview" class="hidden mt-2">
+                                            <button onclick="removeUploadedLogo()" class="text-red-600 hover:text-red-800 text-sm">
+                                                🗑️ Hapus Logo Upload
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Background Settings -->
+                    <div class="card-enhanced rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            🎨 Pengaturan Background
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Current Background Preview -->
+                            <div class="text-center p-6 rounded-xl" id="backgroundPreview" style="background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);">
+                                <p class="text-white font-medium">Background Saat Ini</p>
+                            </div>
+                            
+                            <!-- Background Options -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">Pilih Background:</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button onclick="changeBackground('gradient-blue')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);">
+                                        <span class="text-white text-sm font-medium">Biru Gradien</span>
+                                    </button>
+                                    <button onclick="changeBackground('gradient-green')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+                                        <span class="text-white text-sm font-medium">Hijau Gradien</span>
+                                    </button>
+                                    <button onclick="changeBackground('gradient-purple')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);">
+                                        <span class="text-white text-sm font-medium">Ungu Gradien</span>
+                                    </button>
+                                    <button onclick="changeBackground('gradient-orange')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);">
+                                        <span class="text-white text-sm font-medium">Orange Gradien</span>
+                                    </button>
+                                    <button onclick="changeBackground('gradient-pink')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);">
+                                        <span class="text-white text-sm font-medium">Pink Gradien</span>
+                                    </button>
+                                    <button onclick="changeBackground('gradient-teal')" class="bg-option p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 transition-all duration-300" style="background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);">
+                                        <span class="text-white text-sm font-medium">Teal Gradien</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Custom Background -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Background Kustom:</label>
+                                <div class="space-y-3">
+                                    <div class="flex space-x-2">
+                                        <input type="color" id="bgColor1" class="w-12 h-10 border border-gray-300 rounded" value="#1e40af">
+                                        <input type="color" id="bgColor2" class="w-12 h-10 border border-gray-300 rounded" value="#3730a3">
+                                        <button onclick="setCustomBackground()" class="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                                            Terapkan Gradien Kustom
+                                        </button>
+                                    </div>
+                                    <p class="text-xs text-gray-500">Pilih dua warna untuk membuat gradien kustom</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Upload Background Image -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Upload Background (JPG, PNG):</label>
+                                <div class="space-y-3">
+                                    <input type="file" id="backgroundFileInput" accept="image/*" class="w-full px-4 py-2 border border-gray-300 rounded-lg" onchange="previewBackgroundUpload(event)">
+                                    <p class="text-xs text-gray-500">Ukuran maksimal: 5MB. Format: JPG, PNG. Gambar akan otomatis disesuaikan</p>
+                                    <div id="backgroundUploadPreview" class="hidden">
+                                        <div class="w-full h-20 rounded-lg border overflow-hidden">
+                                            <img id="backgroundPreviewImage" class="w-full h-full object-cover" alt="Background Preview">
+                                        </div>
+                                        <div class="mt-2 flex space-x-2">
+                                            <button onclick="applyBackgroundUpload()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 text-sm">
+                                                ✅ Terapkan Background
+                                            </button>
+                                            <button onclick="cancelBackgroundUpload()" class="text-red-600 hover:text-red-800 text-sm">
+                                                ❌ Batal
+                                            </button>
+                                        </div>
+                                        <div id="backgroundAppliedPreview" class="hidden mt-2">
+                                            <button onclick="removeUploadedBackground()" class="text-red-600 hover:text-red-800 text-sm">
+                                                🗑️ Hapus Background Upload
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Website Title Settings -->
+                    <div class="card-enhanced rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            📝 Pengaturan Judul Website
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Judul Utama:</label>
+                                <input type="text" id="mainTitleInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg" value="Fisika Learning" placeholder="Masukkan judul utama">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subjudul:</label>
+                                <input type="text" id="subTitleInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg" value="Sistem Pembelajaran Fisika Digital" placeholder="Masukkan subjudul">
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi:</label>
+                                <textarea id="descriptionInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg" rows="2" placeholder="Masukkan deskripsi">Platform pembelajaran modern untuk guru dan siswa</textarea>
+                            </div>
+                            
+                            <button onclick="updateWebsiteTitle()" class="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                                💾 Simpan Perubahan Judul
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Reset Settings -->
+                    <div class="card-enhanced rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                            🔄 Reset Pengaturan
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <p class="text-gray-600">Kembalikan semua pengaturan ke default</p>
+                            
+                            <div class="space-y-2">
+                                <button onclick="resetLogo()" class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition duration-200">
+                                    🎨 Reset Logo
+                                </button>
+                                <button onclick="resetBackground()" class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition duration-200">
+                                    🖼️ Reset Background
+                                </button>
+                                <button onclick="resetTitle()" class="w-full bg-yellow-600 text-white py-2 rounded-lg hover:bg-yellow-700 transition duration-200">
+                                    📝 Reset Judul
+                                </button>
+                                <button onclick="resetAllSettings()" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-200">
+                                    🔄 Reset Semua
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-blue-900 text-white py-4 mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="text-sm opacity-80">© 2025 ndatyo. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Student Dashboard -->
+    <div id="studentDashboard" class="hidden">
+        <!-- Header -->
+        <header class="bg-green-700 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center py-6">
+                    <div class="flex items-center fade-in">
+                        <div class="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 float">
+                            <span class="text-white text-xl">⚛️</span>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold text-white">Dashboard Siswa</h1>
+                            <p class="text-white text-sm">Portal Pembelajaran Fisika</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right">
+                            <p class="text-white text-sm">Selamat datang,</p>
+                            <p class="text-white font-semibold" id="studentName">Siswa</p>
+                        </div>
+                        <button onclick="logout()" class="bg-white/20 text-white px-6 py-3 rounded-xl hover:bg-white/30 transition-all duration-300 font-medium border border-white/30">
+                            🚪 Keluar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="bg-green-600 text-white border-b border-green-500">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-2">
+                    <button onclick="showStudentSection('materi')" class="student-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-green-500 transition-all duration-300 font-medium text-white">
+                        📚 Materi
+                    </button>
+                    <button onclick="showStudentSection('kehadiran')" class="student-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-green-500 transition-all duration-300 font-medium text-white">
+                        ✅ Absen
+                    </button>
+                    <button onclick="showStudentSection('nilai')" class="student-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-green-500 transition-all duration-300 font-medium text-white">
+                        📊 Nilai
+                    </button>
+                    <button onclick="showStudentSection('jurnal')" class="student-nav-btn nav-item py-4 px-6 rounded-t-lg hover:bg-green-500 transition-all duration-300 font-medium text-white">
+                        📝 Jurnal
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+            <!-- Student Materi Section -->
+            <div id="studentMateriSection" class="student-section">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Materi Pembelajaran</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="studentMateriList">
+                    <!-- Student materi cards will be populated here -->
+                </div>
+            </div>
+
+            <!-- Student Kehadiran Section -->
+            <div id="studentKehadiranSection" class="student-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Absen Kehadiran</h2>
+                
+                <!-- GPS Attendance Form -->
+                <div class="bg-white p-6 rounded-lg shadow mb-6">
+                    <h3 class="text-lg font-medium mb-4">Absen dengan GPS</h3>
+                    <form id="studentAttendanceForm" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">NISN</label>
+                            <input type="text" id="studentNISN" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Masukkan NISN" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Token</label>
+                            <input type="text" id="attendanceToken" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Masukkan token dari guru" required>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button type="button" onclick="getLocation()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                                📍 Dapatkan Lokasi
+                            </button>
+                            <span id="locationStatus" class="text-sm text-gray-600"></span>
+                        </div>
+                        <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition duration-200">
+                            ✅ Absen Sekarang
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Student Attendance History -->
+                <div class="bg-white rounded-lg shadow">
+                    <div class="p-6 border-b">
+                        <h3 class="text-lg font-medium">Riwayat Kehadiran</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentAttendanceHistory" class="bg-white divide-y divide-gray-200">
+                                <!-- Student attendance history will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Nilai Section -->
+            <div id="studentNilaiSection" class="student-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Nilai Saya</h2>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jenis</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentNilaiList" class="bg-white divide-y divide-gray-200">
+                                <!-- Student nilai will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student Jurnal Section -->
+            <div id="studentJurnalSection" class="student-section hidden">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Jurnal Pembelajaran</h2>
+                <div class="space-y-4" id="studentJurnalList">
+                    <!-- Student jurnal will be populated here -->
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="bg-green-800 text-white py-4 mt-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="text-sm opacity-80">© 2025 ndatyo. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add Materi Modal -->
+    <div id="addMateriModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <h3 class="text-lg font-medium mb-4">Tambah Materi Baru</h3>
+            <form id="addMateriForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Judul Materi</label>
+                    <input type="text" id="materiTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kelas</label>
+                    <select id="materiKelas" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                        <option value="">Pilih Kelas</option>
+                        <option value="X">Kelas X</option>
+                        <option value="XI">Kelas XI</option>
+                        <option value="XII">Kelas XII</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+                    <textarea id="materiDescription" class="w-full px-4 py-2 border border-gray-300 rounded-lg" rows="3"></textarea>
+                </div>
+                
+                <div class="border-t pt-4">
+                    <h4 class="text-md font-medium text-gray-700 mb-3">Link Materi</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Link PPT</label>
+                            <input type="url" id="materiPPTLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Link Video</label>
+                            <input type="url" id="materiVideoLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Link Modul</label>
+                            <input type="url" id="materiModulLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="https://...">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Link Latihan</label>
+                            <input type="url" id="materiLatihanLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="https://...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-2 pt-4">
+                    <button type="button" onclick="closeModal('addMateriModal')" class="px-4 py-2 text-gray-600 hover:text-gray-800">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Kelas Modal -->
+    <div id="addKelasModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-lg font-medium mb-4">Tambah Siswa Baru</h3>
+            <form id="addKelasForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Nama Siswa</label>
+                    <input type="text" id="siswaName" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">NISN</label>
+                    <input type="text" id="siswaNISN" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kelas</label>
+                    <input type="text" id="siswaKelas" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="Contoh: X-1, XI-2, XII-3" required>
+                    <p class="text-xs text-gray-500 mt-1">Masukkan nama kelas bebas (contoh: X-1, X-2, XI-1, XII-3)</p>
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal('addKelasModal')" class="px-4 py-2 text-gray-600 hover:text-gray-800">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Jurnal Modal -->
+    <div id="addJurnalModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-lg font-medium mb-4">Tambah Jurnal</h3>
+            <form id="addJurnalForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Kelas</label>
+                    <select id="jurnalKelas" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                        <option value="">Pilih Kelas</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal</label>
+                    <input type="date" id="jurnalDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Catatan</label>
+                    <textarea id="jurnalNote" class="w-full px-4 py-2 border border-gray-300 rounded-lg" rows="4" required></textarea>
+                </div>
+                <div class="flex justify-end space-x-2">
+                    <button type="button" onclick="closeModal('addJurnalModal')" class="px-4 py-2 text-gray-600 hover:text-gray-800">Batal</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentToken = '';
+        let tokenTimer = 30;
+        let tokenInterval = null;
+        let currentLocation = null;
+        
+        // Settings variables
+        let websiteSettings = {
+            logo: '⚛️',
+            logoType: 'emoji', // 'emoji' or 'image'
+            logoImage: null,
+            background: 'gradient-blue',
+            backgroundType: 'gradient', // 'gradient' or 'image'
+            backgroundImage: null,
+            mainTitle: 'Fisika Learning',
+            subTitle: 'Sistem Pembelajaran Fisika Digital',
+            description: 'Platform pembelajaran modern untuk guru dan siswa'
+        };
+
+        // User accounts
+        const userAccounts = {
+            // Teacher accounts
+            'tyo': { password: 'guru123', type: 'guru', name: 'Teguh Prasetyo, S.Pd.' },
+            
+            // Student accounts (username = NISN, password = NISN)
+            '1234567890': { password: '1234567890', type: 'siswa', name: 'Ahmad Rizki', nisn: '1234567890', kelas: 'X-1' },
+            '1234567891': { password: '1234567891', type: 'siswa', name: 'Siti Nurhaliza', nisn: '1234567891', kelas: 'X-1' },
+            '1234567892': { password: '1234567892', type: 'siswa', name: 'Budi Santoso', nisn: '1234567892', kelas: 'X-2' },
+            '1234567893': { password: '1234567893', type: 'siswa', name: 'Dewi Sartika', nisn: '1234567893', kelas: 'X-3' },
+            '1234567894': { password: '1234567894', type: 'siswa', name: 'Rina Wati', nisn: '1234567894', kelas: 'XI-1' },
+            '1234567895': { password: '1234567895', type: 'siswa', name: 'Joko Susilo', nisn: '1234567895', kelas: 'XI-2' },
+            '1234567896': { password: '1234567896', type: 'siswa', name: 'Maya Indah', nisn: '1234567896', kelas: 'XII-1' },
+            '1234567897': { password: '1234567897', type: 'siswa', name: 'Andi Pratama', nisn: '1234567897', kelas: 'XII-2' },
+            '1234567898': { password: '1234567898', type: 'siswa', name: 'Sari Dewi', nisn: '1234567898', kelas: 'XII-3' }
+        };
+
+        // Sample data
+        let materiData = [
+            {
+                id: 1,
+                title: 'Gerak Lurus',
+                kelas: 'X',
+                description: 'Materi tentang gerak lurus beraturan dan berubah beraturan',
+                files: {
+                    ppt: 'https://example.com/gerak-lurus.pptx',
+                    video: 'https://youtube.com/watch?v=example1',
+                    latihan: 'https://example.com/latihan-gerak-lurus.pdf',
+                    modul: 'https://example.com/modul-gerak-lurus.pdf'
+                }
+            },
+            {
+                id: 2,
+                title: 'Hukum Newton',
+                kelas: 'X',
+                description: 'Tiga hukum Newton tentang gerak',
+                files: {
+                    ppt: 'https://example.com/hukum-newton.pptx',
+                    video: 'https://youtube.com/watch?v=example2',
+                    latihan: 'https://example.com/latihan-newton.pdf',
+                    modul: 'https://example.com/modul-newton.pdf'
+                }
+            },
+            {
+                id: 3,
+                title: 'Gelombang dan Bunyi',
+                kelas: 'XI',
+                description: 'Materi tentang gelombang mekanik dan bunyi',
+                files: {
+                    ppt: 'https://example.com/gelombang.pptx',
+                    video: 'https://youtube.com/watch?v=example3',
+                    latihan: 'https://example.com/latihan-gelombang.pdf',
+                    modul: 'https://example.com/modul-gelombang.pdf'
+                }
+            },
+            {
+                id: 4,
+                title: 'Listrik Dinamis',
+                kelas: 'XI',
+                description: 'Materi tentang arus listrik dan rangkaian',
+                files: {
+                    ppt: 'https://example.com/listrik.pptx',
+                    video: 'https://youtube.com/watch?v=example4',
+                    latihan: 'https://example.com/latihan-listrik.pdf',
+                    modul: 'https://example.com/modul-listrik.pdf'
+                }
+            },
+            {
+                id: 5,
+                title: 'Fisika Modern',
+                kelas: 'XII',
+                description: 'Materi tentang relativitas dan fisika kuantum',
+                files: {
+                    ppt: 'https://example.com/modern.pptx',
+                    video: 'https://youtube.com/watch?v=example5',
+                    latihan: 'https://example.com/latihan-modern.pdf',
+                    modul: 'https://example.com/modul-modern.pdf'
+                }
+            },
+            {
+                id: 6,
+                title: 'Fisika Inti',
+                kelas: 'XII',
+                description: 'Materi tentang radioaktivitas dan reaksi inti',
+                files: {
+                    ppt: 'https://example.com/inti.pptx',
+                    video: 'https://youtube.com/watch?v=example6',
+                    latihan: 'https://example.com/latihan-inti.pdf',
+                    modul: 'https://example.com/modul-inti.pdf'
+                }
+            }
+        ];
+
+        let siswaData = [
+            { id: 1, name: 'Ahmad Rizki', nisn: '1234567890', kelas: 'X-1' },
+            { id: 2, name: 'Siti Nurhaliza', nisn: '1234567891', kelas: 'X-1' },
+            { id: 3, name: 'Budi Santoso', nisn: '1234567892', kelas: 'X-2' },
+            { id: 4, name: 'Dewi Sartika', nisn: '1234567893', kelas: 'X-3' },
+            { id: 5, name: 'Rina Wati', nisn: '1234567894', kelas: 'XI-1' },
+            { id: 6, name: 'Joko Susilo', nisn: '1234567895', kelas: 'XI-2' },
+            { id: 7, name: 'Maya Indah', nisn: '1234567896', kelas: 'XII-1' },
+            { id: 8, name: 'Andi Pratama', nisn: '1234567897', kelas: 'XII-2' },
+            { id: 9, name: 'Sari Dewi', nisn: '1234567898', kelas: 'XII-3' }
+        ];
+
+        let attendanceData = [];
+        let nilaiData = [];
+        let jurnalData = [];
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set today's date for attendance
+            document.getElementById('attendanceDate').valueAsDate = new Date();
+            document.getElementById('jurnalDate').valueAsDate = new Date();
+            
+            // Initialize sample data
+            initializeSampleData();
+        });
+
+        function initializeSampleData() {
+            // Initialize attendance data
+            siswaData.forEach(siswa => {
+                attendanceData.push({
+                    id: Date.now() + Math.random(),
+                    siswaId: siswa.id,
+                    date: new Date().toISOString().split('T')[0],
+                    status: 'hadir',
+                    time: new Date().toLocaleTimeString('id-ID')
+                });
+            });
+
+            // Initialize nilai data
+            siswaData.forEach(siswa => {
+                ['UH1', 'UH2', 'PTS'].forEach(jenis => {
+                    nilaiData.push({
+                        id: Date.now() + Math.random(),
+                        siswaId: siswa.id,
+                        jenis: jenis,
+                        nilai: Math.floor(Math.random() * 40) + 60,
+                        date: new Date().toISOString().split('T')[0]
+                    });
+                });
+            });
+
+            // Initialize jurnal data
+            jurnalData.push(
+                {
+                    id: 1,
+                    kelas: 'X-1',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Pembelajaran hari ini membahas tentang gerak lurus. Siswa terlihat antusias dan aktif bertanya.'
+                },
+                {
+                    id: 2,
+                    kelas: 'X-2',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Materi hukum Newton telah disampaikan. Siswa diminta mengerjakan latihan soal untuk pemahaman lebih lanjut.'
+                },
+                {
+                    id: 3,
+                    kelas: 'X-3',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Diskusi tentang energi dan momentum. Siswa aktif dalam sesi tanya jawab.'
+                },
+                {
+                    id: 4,
+                    kelas: 'XI-1',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Praktikum gelombang bunyi dilaksanakan dengan baik. Semua kelompok berhasil mengumpulkan data percobaan.'
+                },
+                {
+                    id: 5,
+                    kelas: 'XI-2',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Pembahasan listrik dinamis dan rangkaian listrik. Siswa antusias dengan demonstrasi rangkaian sederhana.'
+                },
+                {
+                    id: 6,
+                    kelas: 'XII-1',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Materi fisika modern telah disampaikan. Diskusi tentang teori relativitas Einstein sangat menarik.'
+                },
+                {
+                    id: 7,
+                    kelas: 'XII-2',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Pembelajaran fisika inti dan radioaktivitas. Siswa menunjukkan ketertarikan tinggi pada aplikasi teknologi nuklir.'
+                },
+                {
+                    id: 8,
+                    kelas: 'XII-3',
+                    date: new Date().toISOString().split('T')[0],
+                    note: 'Review materi untuk persiapan ujian akhir. Siswa aktif mengerjakan soal-soal latihan.'
+                }
+            );
+        }
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userType = document.getElementById('userType').value;
+            
+            // Validate credentials
+            const account = userAccounts[username];
+            if (!account || account.password !== password || account.type !== userType) {
+                alert('Username, password, atau tipe user tidak valid!');
+                return;
+            }
+            
+            currentUser = {
+                username: username,
+                type: account.type,
+                name: account.name,
+                nisn: account.nisn || null,
+                kelas: account.kelas || null
+            };
+            
+            document.getElementById('loginPage').classList.add('hidden');
+            
+            if (account.type === 'guru') {
+                document.getElementById('teacherName').textContent = currentUser.name;
+                document.getElementById('teacherDashboard').classList.remove('hidden');
+                showTeacherSection('materi');
+            } else {
+                document.getElementById('studentName').textContent = currentUser.name;
+                document.getElementById('studentDashboard').classList.remove('hidden');
+                showStudentSection('materi');
+            }
+            
+            loadData();
+        });
+
+        // Navigation functions
+        function showLoginForm(userType) {
+            document.getElementById('welcomePage').classList.add('hidden');
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('userType').value = userType;
+            
+            // Update login form based on user type
+            if (userType === 'guru') {
+                document.getElementById('loginIcon').textContent = '👨‍🏫';
+                document.getElementById('loginTitle').textContent = 'Login Guru';
+                document.getElementById('loginSubtitle').textContent = 'Masuk sebagai guru';
+            } else {
+                document.getElementById('loginIcon').textContent = '👨‍🎓';
+                document.getElementById('loginTitle').textContent = 'Login Siswa';
+                document.getElementById('loginSubtitle').textContent = 'Masuk sebagai siswa';
+            }
+        }
+
+        function backToWelcome() {
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('welcomePage').classList.remove('hidden');
+            document.getElementById('loginForm').reset();
+        }
+
+        // Logout functionality
+        function logout() {
+            currentUser = null;
+            document.getElementById('teacherDashboard').classList.add('hidden');
+            document.getElementById('studentDashboard').classList.add('hidden');
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('welcomePage').classList.remove('hidden');
+            document.getElementById('loginForm').reset();
+            
+            // Clear token timer
+            if (tokenInterval) {
+                clearInterval(tokenInterval);
+                tokenInterval = null;
+            }
+        }
+
+        // Teacher navigation
+        function showTeacherSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.teacher-section').forEach(el => el.classList.add('hidden'));
+            
+            // Remove active state from all nav buttons
+            document.querySelectorAll('.teacher-nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600');
+            });
+            
+            // Show selected section with animation
+            const sectionEl = document.getElementById(section + 'Section');
+            sectionEl.classList.remove('hidden');
+            sectionEl.classList.add('fade-in');
+            
+            // Add active state to clicked nav button
+            event.target.classList.add('active', 'bg-blue-600');
+            
+            // Load section-specific data
+            if (section === 'materi') {
+                loadMateriData();
+            } else if (section === 'kelas') {
+                loadKelasData();
+            } else if (section === 'kehadiran') {
+                loadKehadiranData();
+            } else if (section === 'nilai') {
+                loadNilaiData();
+            } else if (section === 'jurnal') {
+                loadJurnalData();
+            } else if (section === 'pengaturan') {
+                loadPengaturanData();
+            }
+        }
+
+        // Student navigation
+        function showStudentSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.student-section').forEach(el => el.classList.add('hidden'));
+            
+            // Remove active state from all nav buttons
+            document.querySelectorAll('.student-nav-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-green-500');
+            });
+            
+            // Show selected section with animation
+            const sectionEl = document.getElementById('student' + section.charAt(0).toUpperCase() + section.slice(1) + 'Section');
+            sectionEl.classList.remove('hidden');
+            sectionEl.classList.add('fade-in');
+            
+            // Add active state to clicked nav button
+            event.target.classList.add('active', 'bg-green-500');
+            
+            // Load section-specific data
+            if (section === 'materi') {
+                loadStudentMateriData();
+            } else if (section === 'kehadiran') {
+                loadStudentKehadiranData();
+            } else if (section === 'nilai') {
+                loadStudentNilaiData();
+            } else if (section === 'jurnal') {
+                loadStudentJurnalData();
+            }
+        }
+
+        // Global variables for materi navigation
+        let currentSelectedClass = '';
+
+        // Load data functions
+        function loadData() {
+            loadMateriData();
+            loadKelasData();
+            loadKehadiranData();
+            loadNilaiData();
+            loadJurnalData();
+            loadStudentMateriData();
+            loadStudentKehadiranData();
+            loadStudentNilaiData();
+            loadStudentJurnalData();
+            updateMateriCounts();
+        }
+
+        function updateMateriCounts() {
+            const countX = materiData.filter(m => m.kelas === 'X').length;
+            const countXI = materiData.filter(m => m.kelas === 'XI').length;
+            const countXII = materiData.filter(m => m.kelas === 'XII').length;
+            
+            document.getElementById('materiCountX').textContent = `${countX} Materi`;
+            document.getElementById('materiCountXI').textContent = `${countXI} Materi`;
+            document.getElementById('materiCountXII').textContent = `${countXII} Materi`;
+        }
+
+        function showMateriByClass(kelas) {
+            currentSelectedClass = kelas;
+            document.getElementById('materiClassView').classList.add('hidden');
+            document.getElementById('materiDetailView').classList.remove('hidden');
+            document.getElementById('currentMateriClass').textContent = kelas;
+            loadMateriData();
+        }
+
+        function backToMateriClassView() {
+            document.getElementById('materiDetailView').classList.add('hidden');
+            document.getElementById('materiClassView').classList.remove('hidden');
+            currentSelectedClass = '';
+        }
+
+        function loadMateriData() {
+            const materiList = document.getElementById('materiList');
+            materiList.innerHTML = '';
+            
+            // Filter materi by selected class
+            const filteredMateri = currentSelectedClass ? 
+                materiData.filter(m => m.kelas === currentSelectedClass) : 
+                materiData;
+            
+            if (filteredMateri.length === 0) {
+                materiList.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 text-6xl mb-4">📚</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada materi</h3>
+                        <p class="text-gray-500">Klik tombol "Tambah Materi" untuk menambah materi baru</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredMateri.forEach((materi, index) => {
+                const materiCard = document.createElement('div');
+                materiCard.className = 'card-enhanced rounded-2xl p-6 hover-lift slide-up';
+                materiCard.style.animationDelay = `${index * 0.1}s`;
+                materiCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">${materi.title}</h3>
+                        <span class="status-indicator bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs font-medium px-3 py-1 rounded-full">Kelas ${materi.kelas}</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">${materi.description}</p>
+                    <div class="space-y-3">
+                        <div class="flex flex-wrap gap-2">
+                            ${materi.files.ppt ? '<span class="status-indicator bg-green-100 text-green-800 text-xs px-3 py-2 rounded-full font-medium">📄 PPT</span>' : ''}
+                            ${materi.files.video ? '<span class="status-indicator bg-red-100 text-red-800 text-xs px-3 py-2 rounded-full font-medium">🎥 Video</span>' : ''}
+                            ${materi.files.latihan ? '<span class="status-indicator bg-purple-100 text-purple-800 text-xs px-3 py-2 rounded-full font-medium">📝 Latihan</span>' : ''}
+                            ${materi.files.modul ? '<span class="status-indicator bg-indigo-100 text-indigo-800 text-xs px-3 py-2 rounded-full font-medium">📚 Modul</span>' : ''}
+                        </div>
+                    </div>
+                    <div class="mt-6 flex justify-end">
+                        <button onclick="deleteMateri(${materi.id})" class="glass text-red-600 hover:text-red-800 px-4 py-2 rounded-lg hover:scale-105 transition-all duration-300 font-medium">
+                            🗑️ Hapus
+                        </button>
+                    </div>
+                `;
+                materiList.appendChild(materiCard);
+            });
+        }
+
+        function loadStudentMateriData() {
+            const studentMateriList = document.getElementById('studentMateriList');
+            studentMateriList.innerHTML = '';
+            
+            if (!currentUser || !currentUser.kelas) {
+                studentMateriList.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 text-6xl mb-4">📚</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak dapat memuat materi</h3>
+                        <p class="text-gray-500">Informasi kelas tidak ditemukan</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Get student's class level (X, XI, XII) - more robust parsing
+            let studentClassLevel = '';
+            const kelasUpper = currentUser.kelas.toUpperCase();
+            
+            if (kelasUpper.includes('XII') || kelasUpper.includes('12')) {
+                studentClassLevel = 'XII';
+            } else if (kelasUpper.includes('XI') || kelasUpper.includes('11')) {
+                studentClassLevel = 'XI';
+            } else if (kelasUpper.includes('X') || kelasUpper.includes('10')) {
+                studentClassLevel = 'X';
+            }
+            
+            console.log('Student class:', currentUser.kelas, 'Level detected:', studentClassLevel); // Debug log
+            console.log('All available materials:', materiData.map(m => `${m.title} (Kelas ${m.kelas})`)); // Debug log
+            
+            // Filter materials by student's class level
+            const studentMateri = materiData.filter(materi => {
+                console.log(`Comparing material class "${materi.kelas}" with student level "${studentClassLevel}"`);
+                return materi.kelas === studentClassLevel;
+            });
+            
+            console.log('Filtered materials for student:', studentMateri.map(m => `${m.title} (Kelas ${m.kelas})`)); // Debug log
+            
+            if (studentMateri.length === 0) {
+                studentMateriList.innerHTML = `
+                    <div class="col-span-full text-center py-12">
+                        <div class="text-gray-400 text-6xl mb-4">📚</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada materi</h3>
+                        <p class="text-gray-500">Materi untuk kelas ${studentClassLevel} belum tersedia</p>
+                        <p class="text-xs text-gray-400 mt-2">Kelas Anda: ${currentUser.kelas} | Level terdeteksi: ${studentClassLevel}</p>
+                        <p class="text-xs text-gray-300 mt-1">Debug: Total materi tersedia = ${materiData.length}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            studentMateri.forEach((materi, index) => {
+                const materiCard = document.createElement('div');
+                materiCard.className = 'card-enhanced rounded-2xl p-6 hover-lift bounce-in';
+                materiCard.style.animationDelay = `${index * 0.15}s`;
+                
+                // Count available files to determine grid layout
+                const availableFiles = [
+                    materi.files.ppt,
+                    materi.files.video,
+                    materi.files.latihan,
+                    materi.files.modul
+                ].filter(file => file && file.trim() !== '');
+                
+                const gridCols = availableFiles.length === 1 ? 'grid-cols-1' : 
+                               availableFiles.length === 2 ? 'grid-cols-2' : 
+                               availableFiles.length === 3 ? 'grid-cols-3' : 'grid-cols-2';
+                
+                materiCard.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">${materi.title}</h3>
+                        <span class="status-indicator bg-gradient-to-r from-green-500 to-blue-600 text-white text-xs font-medium px-3 py-1 rounded-full">Kelas ${materi.kelas}</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">${materi.description}</p>
+                    <div class="space-y-4">
+                        <div class="grid ${gridCols} gap-3">
+                            ${materi.files.ppt ? `<button onclick="openLink('${materi.files.ppt}')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-xl hover:scale-105 transition-all duration-300 font-medium shadow-lg">📄 Buka PPT</button>` : ''}
+                            ${materi.files.video ? `<button onclick="openLink('${materi.files.video}')" class="bg-orange-600 hover:bg-orange-700 text-white px-4 py-3 rounded-xl hover:scale-105 transition-all duration-300 font-medium shadow-lg">🎥 Buka Video</button>` : ''}
+                            ${materi.files.latihan ? `<button onclick="openLink('${materi.files.latihan}')" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-xl hover:scale-105 transition-all duration-300 font-medium shadow-lg">📝 Buka Latihan</button>` : ''}
+                            ${materi.files.modul ? `<button onclick="openLink('${materi.files.modul}')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-xl hover:scale-105 transition-all duration-300 font-medium shadow-lg">📚 Buka Modul</button>` : ''}
+                        </div>
+                    </div>
+                `;
+                studentMateriList.appendChild(materiCard);
+            });
+        }
+
+        function loadKelasData() {
+            const siswaList = document.getElementById('siswaList');
+            const kelasFilter = document.getElementById('kelasFilter');
+            const nilaiKelasFilter = document.getElementById('nilaiKelasFilter');
+            const kelasFilterSiswa = document.getElementById('kelasFilterSiswa');
+            const kelasFilterKehadiran = document.getElementById('kelasFilterKehadiran');
+            
+            // Clear existing data
+            siswaList.innerHTML = '';
+            
+            // Populate class filters
+            const classes = [...new Set(siswaData.map(siswa => siswa.kelas))].sort();
+            kelasFilter.innerHTML = '<option value="">Semua Kelas</option>';
+            nilaiKelasFilter.innerHTML = '<option value="">Semua Kelas</option>';
+            kelasFilterSiswa.innerHTML = '<option value="">Semua Kelas</option>';
+            kelasFilterKehadiran.innerHTML = '<option value="">Semua Kelas</option>';
+            
+            classes.forEach(kelas => {
+                kelasFilter.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+                nilaiKelasFilter.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+                kelasFilterSiswa.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+                kelasFilterKehadiran.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+            });
+            
+            // Populate student list (initially show all)
+            filterSiswaByClass();
+        }
+
+        function filterSiswaByClass() {
+            const siswaList = document.getElementById('siswaList');
+            const selectedClass = document.getElementById('kelasFilterSiswa').value;
+            
+            siswaList.innerHTML = '';
+            
+            const filteredSiswa = selectedClass ? 
+                siswaData.filter(siswa => siswa.kelas === selectedClass) : 
+                siswaData;
+            
+            if (filteredSiswa.length === 0) {
+                siswaList.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">👥</div>
+                            Tidak ada siswa ditemukan
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            filteredSiswa.forEach(siswa => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${siswa.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.nisn}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.kelas}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <button onclick="deleteSiswa(${siswa.id})" class="text-red-600 hover:text-red-900">Hapus</button>
+                    </td>
+                `;
+                siswaList.appendChild(row);
+            });
+        }
+
+        function loadKehadiranData() {
+            // Set default dates
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            
+            filterAttendance();
+        }
+
+        function filterAttendance() {
+            const attendanceList = document.getElementById('attendanceList');
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            const selectedClass = document.getElementById('kelasFilterKehadiran').value;
+            
+            attendanceList.innerHTML = '';
+            
+            // Filter siswa by class if selected
+            const filteredSiswa = selectedClass ? 
+                siswaData.filter(siswa => siswa.kelas === selectedClass) : 
+                siswaData;
+            
+            if (filteredSiswa.length === 0) {
+                attendanceList.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📅</div>
+                            Tidak ada data kehadiran ditemukan
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Use today's date if no date range specified
+            const filterStartDate = startDate || new Date().toISOString().split('T')[0];
+            const filterEndDate = endDate || filterStartDate;
+            
+            filteredSiswa.forEach(siswa => {
+                // Get attendance within date range
+                const attendanceInRange = attendanceData.filter(att => 
+                    att.siswaId === siswa.id && 
+                    att.date >= filterStartDate && 
+                    att.date <= filterEndDate
+                );
+                
+                // Show latest attendance or default to alpha
+                const latestAttendance = attendanceInRange.length > 0 ? 
+                    attendanceInRange[attendanceInRange.length - 1] : 
+                    { status: 'alpha', time: '-' };
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${siswa.name}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.nisn}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.kelas}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(latestAttendance.status)}">
+                            ${latestAttendance.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <select onchange="updateAttendance(${siswa.id}, this.value)" class="text-xs border rounded px-2 py-1">
+                            <option value="hadir" ${latestAttendance.status === 'hadir' ? 'selected' : ''}>Hadir</option>
+                            <option value="sakit" ${latestAttendance.status === 'sakit' ? 'selected' : ''}>Sakit</option>
+                            <option value="izin" ${latestAttendance.status === 'izin' ? 'selected' : ''}>Izin</option>
+                            <option value="alpha" ${latestAttendance.status === 'alpha' ? 'selected' : ''}>Alpha</option>
+                        </select>
+                    </td>
+                `;
+                attendanceList.appendChild(row);
+            });
+        }
+
+        function loadNilaiData() {
+            const nilaiList = document.getElementById('nilaiList');
+            nilaiList.innerHTML = '';
+            
+            nilaiData.forEach(nilai => {
+                const siswa = siswaData.find(s => s.id === nilai.siswaId);
+                if (siswa) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${siswa.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.nisn}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${siswa.kelas}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${nilai.jenis}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${nilai.nilai}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <button onclick="editNilai(${nilai.id})" class="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
+                            <button onclick="deleteNilai(${nilai.id})" class="text-red-600 hover:text-red-900">Hapus</button>
+                        </td>
+                    `;
+                    nilaiList.appendChild(row);
+                }
+            });
+        }
+
+        function loadJurnalData() {
+            const jurnalList = document.getElementById('jurnalList');
+            jurnalList.innerHTML = '';
+            
+            jurnalData.forEach(jurnal => {
+                const jurnalCard = document.createElement('div');
+                jurnalCard.className = 'bg-white rounded-lg shadow-md p-6';
+                jurnalCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">Kelas ${jurnal.kelas}</h3>
+                            <p class="text-sm text-gray-500">${new Date(jurnal.date).toLocaleDateString('id-ID')}</p>
+                        </div>
+                        <button onclick="deleteJurnal(${jurnal.id})" class="text-red-600 hover:text-red-800">
+                            🗑️ Hapus
+                        </button>
+                    </div>
+                    <p class="text-gray-700">${jurnal.note}</p>
+                `;
+                jurnalList.appendChild(jurnalCard);
+            });
+        }
+
+        function loadStudentKehadiranData() {
+            const studentAttendanceHistory = document.getElementById('studentAttendanceHistory');
+            studentAttendanceHistory.innerHTML = '';
+            
+            if (!currentUser || !currentUser.nisn) {
+                studentAttendanceHistory.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📅</div>
+                            Tidak dapat memuat riwayat kehadiran
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Find current student in siswaData
+            const currentStudent = siswaData.find(s => s.nisn === currentUser.nisn);
+            if (!currentStudent) {
+                studentAttendanceHistory.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📅</div>
+                            Data siswa tidak ditemukan
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Get student's attendance records
+            const studentAttendances = attendanceData
+                .filter(att => att.siswaId === currentStudent.id)
+                .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending
+            
+            if (studentAttendances.length === 0) {
+                studentAttendanceHistory.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📅</div>
+                            Belum ada riwayat kehadiran
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            studentAttendances.forEach(attendance => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${new Date(attendance.date).toLocaleDateString('id-ID')}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(attendance.status)}">
+                            ${attendance.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${attendance.time}</td>
+                `;
+                studentAttendanceHistory.appendChild(row);
+            });
+        }
+
+        function loadStudentNilaiData() {
+            const studentNilaiList = document.getElementById('studentNilaiList');
+            studentNilaiList.innerHTML = '';
+            
+            if (!currentUser || !currentUser.nisn) {
+                studentNilaiList.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📊</div>
+                            Tidak dapat memuat nilai
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Find current student in siswaData
+            const currentStudent = siswaData.find(s => s.nisn === currentUser.nisn);
+            if (!currentStudent) {
+                studentNilaiList.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📊</div>
+                            Data siswa tidak ditemukan
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Get student's grades
+            const studentGrades = nilaiData
+                .filter(nilai => nilai.siswaId === currentStudent.id)
+                .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date descending
+            
+            if (studentGrades.length === 0) {
+                studentNilaiList.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-2">📊</div>
+                            Belum ada nilai
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            studentGrades.forEach(grade => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${grade.jenis}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${grade.nilai}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${new Date(grade.date).toLocaleDateString('id-ID')}</td>
+                `;
+                studentNilaiList.appendChild(row);
+            });
+        }
+
+        function loadStudentJurnalData() {
+            const studentJurnalList = document.getElementById('studentJurnalList');
+            studentJurnalList.innerHTML = '';
+            
+            if (!currentUser || !currentUser.kelas) {
+                studentJurnalList.innerHTML = `
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div class="text-gray-400 text-6xl mb-4">📝</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Tidak dapat memuat jurnal</h3>
+                        <p class="text-gray-500">Informasi kelas tidak ditemukan</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Filter jurnal by student's class
+            const studentJurnal = jurnalData.filter(jurnal => jurnal.kelas === currentUser.kelas);
+            
+            if (studentJurnal.length === 0) {
+                studentJurnalList.innerHTML = `
+                    <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                        <div class="text-gray-400 text-6xl mb-4">📝</div>
+                        <h3 class="text-lg font-medium text-gray-900 mb-2">Belum ada jurnal</h3>
+                        <p class="text-gray-500">Jurnal untuk kelas ${currentUser.kelas} belum tersedia</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by date descending
+            studentJurnal.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            studentJurnal.forEach(jurnal => {
+                const jurnalCard = document.createElement('div');
+                jurnalCard.className = 'bg-white rounded-lg shadow-md p-6';
+                jurnalCard.innerHTML = `
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Kelas ${jurnal.kelas}</h3>
+                        <p class="text-sm text-gray-500">${new Date(jurnal.date).toLocaleDateString('id-ID')}</p>
+                    </div>
+                    <p class="text-gray-700">${jurnal.note}</p>
+                `;
+                studentJurnalList.appendChild(jurnalCard);
+            });
+        }
+
+        // Token management
+        function generateToken() {
+            currentToken = Math.random().toString(36).substring(2, 8).toUpperCase();
+            document.getElementById('currentToken').textContent = currentToken;
+            
+            // Reset timer
+            tokenTimer = 30;
+            document.getElementById('tokenTimer').textContent = tokenTimer;
+            
+            // Clear existing interval
+            if (tokenInterval) {
+                clearInterval(tokenInterval);
+            }
+            
+            // Start new timer
+            tokenInterval = setInterval(() => {
+                tokenTimer--;
+                document.getElementById('tokenTimer').textContent = tokenTimer;
+                
+                if (tokenTimer <= 0) {
+                    generateToken(); // Auto-generate new token
+                }
+            }, 1000);
+        }
+
+        // Attendance functions
+        function markAllPresent() {
+            const today = new Date().toISOString().split('T')[0];
+            const currentTime = new Date().toLocaleTimeString('id-ID');
+            
+            siswaData.forEach(siswa => {
+                // Remove existing attendance for today
+                attendanceData = attendanceData.filter(att => 
+                    !(att.siswaId === siswa.id && att.date === today)
+                );
+                
+                // Add new attendance
+                attendanceData.push({
+                    id: Date.now() + Math.random(),
+                    siswaId: siswa.id,
+                    date: today,
+                    status: 'hadir',
+                    time: currentTime
+                });
+            });
+            
+            loadKehadiranData();
+            alert('Semua siswa telah ditandai hadir!');
+        }
+
+        function updateAttendance(siswaId, status) {
+            const today = new Date().toISOString().split('T')[0];
+            const currentTime = new Date().toLocaleTimeString('id-ID');
+            
+            // Remove existing attendance for today
+            attendanceData = attendanceData.filter(att => 
+                !(att.siswaId === siswaId && att.date === today)
+            );
+            
+            // Add new attendance
+            attendanceData.push({
+                id: Date.now() + Math.random(),
+                siswaId: siswaId,
+                date: today,
+                status: status,
+                time: status === 'alpha' ? '-' : currentTime
+            });
+            
+            loadKehadiranData();
+        }
+
+        function printAttendance() {
+            const printWindow = window.open('', '_blank');
+            const selectedClass = document.getElementById('kelasFilterKehadiran').value;
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            let title = 'Rekap Kehadiran';
+            if (selectedClass) title += ` Kelas ${selectedClass}`;
+            if (startDate && endDate) {
+                if (startDate === endDate) {
+                    title += ` Tanggal ${new Date(startDate).toLocaleDateString('id-ID')}`;
+                } else {
+                    title += ` Periode ${new Date(startDate).toLocaleDateString('id-ID')} - ${new Date(endDate).toLocaleDateString('id-ID')}`;
+                }
+            }
+            
+            // Filter siswa by class if selected
+            const filteredSiswa = selectedClass ? 
+                siswaData.filter(siswa => siswa.kelas === selectedClass) : 
+                siswaData;
+            
+            // Filter attendance by date range
+            const filterStartDate = startDate || new Date().toISOString().split('T')[0];
+            const filterEndDate = endDate || filterStartDate;
+            
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>${title}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                        .header { text-align: center; margin-bottom: 20px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h2>${title}</h2>
+                        <p>Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}</p>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>NISN</th>
+                                <th>Kelas</th>
+                                <th>Hadir</th>
+                                <th>Sakit</th>
+                                <th>Izin</th>
+                                <th>Alpha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${filteredSiswa.map((siswa, index) => {
+                                const attendances = attendanceData.filter(att => 
+                                    att.siswaId === siswa.id && 
+                                    att.date >= filterStartDate && 
+                                    att.date <= filterEndDate
+                                );
+                                const hadir = attendances.filter(att => att.status === 'hadir').length;
+                                const sakit = attendances.filter(att => att.status === 'sakit').length;
+                                const izin = attendances.filter(att => att.status === 'izin').length;
+                                const alpha = attendances.filter(att => att.status === 'alpha').length;
+                                
+                                return `
+                                    <tr>
+                                        <td>${index + 1}</td>
+                                        <td>${siswa.name}</td>
+                                        <td>${siswa.nisn}</td>
+                                        <td>${siswa.kelas}</td>
+                                        <td>${hadir}</td>
+                                        <td>${sakit}</td>
+                                        <td>${izin}</td>
+                                        <td>${alpha}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Student attendance functions
+        function getLocation() {
+            if (navigator.geolocation) {
+                document.getElementById('locationStatus').textContent = 'Mendapatkan lokasi...';
+                
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        currentLocation = {
+                            latitude: position.coords.latitude,
+                            longitude: position.coords.longitude
+                        };
+                        document.getElementById('locationStatus').textContent = 
+                            `Lokasi ditemukan: ${currentLocation.latitude.toFixed(6)}, ${currentLocation.longitude.toFixed(6)}`;
+                    },
+                    function(error) {
+                        document.getElementById('locationStatus').textContent = 'Gagal mendapatkan lokasi: ' + error.message;
+                    }
+                );
+            } else {
+                document.getElementById('locationStatus').textContent = 'Geolocation tidak didukung browser ini';
+            }
+        }
+
+        document.getElementById('studentAttendanceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nisn = document.getElementById('studentNISN').value;
+            const token = document.getElementById('attendanceToken').value;
+            
+            if (!currentLocation) {
+                alert('Silakan dapatkan lokasi terlebih dahulu!');
+                return;
+            }
+            
+            if (token !== currentToken) {
+                alert('Token tidak valid atau sudah kadaluarsa!');
+                return;
+            }
+            
+            // Find student by NISN
+            const student = siswaData.find(s => s.nisn === nisn);
+            if (!student) {
+                alert('NISN tidak ditemukan!');
+                return;
+            }
+            
+            // Record attendance
+            const today = new Date().toISOString().split('T')[0];
+            const currentTime = new Date().toLocaleTimeString('id-ID');
+            
+            // Remove existing attendance for today
+            attendanceData = attendanceData.filter(att => 
+                !(att.siswaId === student.id && att.date === today)
+            );
+            
+            // Add new attendance
+            attendanceData.push({
+                id: Date.now() + Math.random(),
+                siswaId: student.id,
+                date: today,
+                status: 'hadir',
+                time: currentTime,
+                location: currentLocation
+            });
+            
+            alert('Absensi berhasil dicatat!');
+            document.getElementById('studentAttendanceForm').reset();
+            document.getElementById('locationStatus').textContent = '';
+            currentLocation = null;
+            
+            loadStudentKehadiranData();
+        });
+
+        // Modal functions
+        function showAddMateriModal() {
+            document.getElementById('addMateriModal').classList.remove('hidden');
+            document.getElementById('addMateriModal').classList.add('flex');
+        }
+
+        function showAddKelasModal() {
+            document.getElementById('addKelasModal').classList.remove('hidden');
+            document.getElementById('addKelasModal').classList.add('flex');
+        }
+
+        function showAddJurnalModal() {
+            // Populate class options
+            const jurnalKelasSelect = document.getElementById('jurnalKelas');
+            const classes = [...new Set(siswaData.map(siswa => siswa.kelas))].sort();
+            
+            jurnalKelasSelect.innerHTML = '<option value="">Pilih Kelas</option>';
+            classes.forEach(kelas => {
+                jurnalKelasSelect.innerHTML += `<option value="${kelas}">${kelas}</option>`;
+            });
+            
+            document.getElementById('addJurnalModal').classList.remove('hidden');
+            document.getElementById('addJurnalModal').classList.add('flex');
+        }
+
+        function showImportModal() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.csv,.xlsx,.xls';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Simulate file processing
+                    alert(`Mengimpor file: ${file.name}\n\nFormat yang didukung:\n- CSV: nama,nisn,kelas\n- Excel: kolom A=nama, B=nisn, C=kelas\n\nContoh data berhasil diimpor!`);
+                    
+                    // Add sample imported data
+                    const importedData = [
+                        { id: Date.now() + 1, name: 'Andi Pratama', nisn: '2024001001', kelas: 'X-4' },
+                        { id: Date.now() + 2, name: 'Sari Dewi', nisn: '2024001002', kelas: 'XI-3' },
+                        { id: Date.now() + 3, name: 'Budi Hartono', nisn: '2024001003', kelas: 'XII-4' }
+                    ];
+                    
+                    siswaData.push(...importedData);
+                    loadKelasData();
+                    loadKehadiranData();
+                }
+            };
+            input.click();
+        }
+
+        function showUploadNilaiModal() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.csv,.xlsx,.xls';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    // Show upload options
+                    const jenis = prompt('Pilih jenis nilai:\n1. UH1\n2. UH2\n3. PTS\n4. PAS\n\nMasukkan nomor (1-4):', '1');
+                    const jenisMap = { '1': 'UH1', '2': 'UH2', '3': 'PTS', '4': 'PAS' };
+                    const selectedJenis = jenisMap[jenis] || 'UH1';
+                    
+                    alert(`Mengupload nilai ${selectedJenis} dari file: ${file.name}\n\nFormat yang didukung:\n- CSV: nisn,nilai\n- Excel: kolom A=nisn, B=nilai\n\nContoh data berhasil diupload!`);
+                    
+                    // Add sample uploaded grades
+                    siswaData.forEach((siswa, index) => {
+                        // Remove existing grade of same type
+                        nilaiData = nilaiData.filter(n => !(n.siswaId === siswa.id && n.jenis === selectedJenis));
+                        
+                        // Add new grade
+                        nilaiData.push({
+                            id: Date.now() + index,
+                            siswaId: siswa.id,
+                            jenis: selectedJenis,
+                            nilai: Math.floor(Math.random() * 40) + 60, // Random grade 60-100
+                            date: new Date().toISOString().split('T')[0]
+                        });
+                    });
+                    
+                    loadNilaiData();
+                }
+            };
+            input.click();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.getElementById(modalId).classList.remove('flex');
+        }
+
+        // Form submissions
+        document.getElementById('addMateriForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedKelas = document.getElementById('materiKelas').value;
+            
+            // If we're in a specific class view, use that class
+            const kelasToUse = currentSelectedClass || selectedKelas;
+            
+            const newMateri = {
+                id: Date.now(),
+                title: document.getElementById('materiTitle').value,
+                kelas: kelasToUse,
+                description: document.getElementById('materiDescription').value,
+                files: {
+                    ppt: document.getElementById('materiPPTLink').value || null,
+                    video: document.getElementById('materiVideoLink').value || null,
+                    latihan: document.getElementById('materiLatihanLink').value || null,
+                    modul: document.getElementById('materiModulLink').value || null
+                }
+            };
+            
+            materiData.push(newMateri);
+            loadMateriData();
+            loadStudentMateriData();
+            updateMateriCounts();
+            closeModal('addMateriModal');
+            this.reset();
+            
+            alert('Materi berhasil ditambahkan!');
+        });
+
+        document.getElementById('addKelasForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newSiswa = {
+                id: Date.now(),
+                name: document.getElementById('siswaName').value,
+                nisn: document.getElementById('siswaNISN').value,
+                kelas: document.getElementById('siswaKelas').value
+            };
+            
+            siswaData.push(newSiswa);
+            loadKelasData();
+            loadKehadiranData();
+            closeModal('addKelasModal');
+            this.reset();
+            
+            alert('Siswa berhasil ditambahkan!');
+        });
+
+        document.getElementById('addJurnalForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newJurnal = {
+                id: Date.now(),
+                kelas: document.getElementById('jurnalKelas').value,
+                date: document.getElementById('jurnalDate').value,
+                note: document.getElementById('jurnalNote').value
+            };
+            
+            jurnalData.push(newJurnal);
+            loadJurnalData();
+            loadStudentJurnalData();
+            closeModal('addJurnalModal');
+            this.reset();
+            
+            alert('Jurnal berhasil ditambahkan!');
+        });
+
+        // Delete functions
+        function deleteMateri(id) {
+            if (confirm('Yakin ingin menghapus materi ini?')) {
+                materiData = materiData.filter(m => m.id !== id);
+                loadMateriData();
+                loadStudentMateriData();
+                updateMateriCounts();
+                alert('Materi berhasil dihapus!');
+            }
+        }
+
+        function deleteSiswa(id) {
+            if (confirm('Yakin ingin menghapus siswa ini?')) {
+                siswaData = siswaData.filter(s => s.id !== id);
+                attendanceData = attendanceData.filter(a => a.siswaId !== id);
+                nilaiData = nilaiData.filter(n => n.siswaId !== id);
+                loadKelasData();
+                filterAttendance();
+                loadNilaiData();
+                alert('Siswa berhasil dihapus!');
+            }
+        }
+
+        function deleteNilai(id) {
+            if (confirm('Yakin ingin menghapus nilai ini?')) {
+                nilaiData = nilaiData.filter(n => n.id !== id);
+                loadNilaiData();
+                alert('Nilai berhasil dihapus!');
+            }
+        }
+
+        function deleteJurnal(id) {
+            if (confirm('Yakin ingin menghapus jurnal ini?')) {
+                jurnalData = jurnalData.filter(j => j.id !== id);
+                loadJurnalData();
+                loadStudentJurnalData();
+                alert('Jurnal berhasil dihapus!');
+            }
+        }
+
+        // Utility functions
+        function getStatusColor(status) {
+            switch(status) {
+                case 'hadir': return 'bg-green-100 text-green-800';
+                case 'sakit': return 'bg-yellow-100 text-yellow-800';
+                case 'izin': return 'bg-blue-100 text-blue-800';
+                case 'alpha': return 'bg-red-100 text-red-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        function downloadFile(filename) {
+            // Simulate file download
+            alert(`Mengunduh file: ${filename}`);
+        }
+
+        function openLink(url) {
+            if (url && url.trim() !== '') {
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+                alert('Link tidak tersedia');
+            }
+        }
+
+        function editNilai(id) {
+            const nilai = nilaiData.find(n => n.id === id);
+            if (nilai) {
+                const newNilai = prompt('Masukkan nilai baru:', nilai.nilai);
+                if (newNilai !== null && !isNaN(newNilai)) {
+                    nilai.nilai = parseInt(newNilai);
+                    loadNilaiData();
+                    alert('Nilai berhasil diupdate!');
+                }
+            }
+        }
+
+        // Settings functions
+        function loadPengaturanData() {
+            // Update preview elements with current settings
+            document.getElementById('currentLogoIcon').textContent = websiteSettings.logo;
+            document.getElementById('mainTitleInput').value = websiteSettings.mainTitle;
+            document.getElementById('subTitleInput').value = websiteSettings.subTitle;
+            document.getElementById('descriptionInput').value = websiteSettings.description;
+            
+            // Update background preview
+            updateBackgroundPreview();
+        }
+        
+        function changeLogo(emoji) {
+            websiteSettings.logo = emoji;
+            updateAllLogos();
+            showSuccessMessage('Logo berhasil diubah!');
+        }
+        
+        function setCustomLogo() {
+            const customLogo = document.getElementById('customLogoInput').value.trim();
+            if (customLogo) {
+                websiteSettings.logo = customLogo;
+                updateAllLogos();
+                document.getElementById('customLogoInput').value = '';
+                showSuccessMessage('Logo kustom berhasil diterapkan!');
+            } else {
+                alert('Masukkan emoji untuk logo kustom!');
+            }
+        }
+        
+        function updateAllLogos() {
+            if (websiteSettings.logoType === 'image' && websiteSettings.logoImage) {
+                // Update with image logo
+                updateLogoElements(websiteSettings.logoImage, true);
+            } else {
+                // Update with emoji logo
+                updateLogoElements(websiteSettings.logo, false);
+            }
+        }
+        
+        function updateLogoElements(logoContent, isImage) {
+            // Update preview logo
+            const currentLogoIcon = document.getElementById('currentLogoIcon');
+            if (currentLogoIcon) {
+                if (isImage) {
+                    currentLogoIcon.innerHTML = `<img src="${logoContent}" class="w-8 h-8 object-contain" alt="Logo">`;
+                } else {
+                    currentLogoIcon.textContent = logoContent;
+                }
+            }
+            
+            // Update welcome page main logo
+            const welcomeMainLogos = document.querySelectorAll('#welcomePage .gradient-green span');
+            welcomeMainLogos.forEach(el => {
+                if (isImage) {
+                    el.innerHTML = `<img src="${logoContent}" class="w-12 h-12 object-contain" alt="Logo">`;
+                } else {
+                    el.textContent = logoContent;
+                }
+            });
+            
+            // Update header logos (don't change role-specific icons)
+            const headerLogos = document.querySelectorAll('header .bg-green-600 span, header .bg-blue-600 span');
+            headerLogos.forEach(el => {
+                if (isImage) {
+                    el.innerHTML = `<img src="${logoContent}" class="w-6 h-6 object-contain" alt="Logo">`;
+                } else {
+                    el.textContent = logoContent;
+                }
+            });
+        }
+        
+        function changeBackground(backgroundClass) {
+            websiteSettings.background = backgroundClass;
+            updateAllBackgrounds();
+            updateBackgroundPreview();
+            showSuccessMessage('Background berhasil diubah!');
+        }
+        
+        function setCustomBackground() {
+            const color1 = document.getElementById('bgColor1').value;
+            const color2 = document.getElementById('bgColor2').value;
+            
+            const customGradient = `linear-gradient(135deg, ${color1} 0%, ${color2} 100%)`;
+            websiteSettings.background = 'custom';
+            websiteSettings.customGradient = customGradient;
+            
+            updateAllBackgrounds();
+            updateBackgroundPreview();
+            showSuccessMessage('Background kustom berhasil diterapkan!');
+        }
+        
+        function updateAllBackgrounds() {
+            const welcomePage = document.getElementById('welcomePage');
+            const loginPage = document.getElementById('loginPage');
+            
+            // Remove all gradient classes
+            const gradientClasses = ['gradient-blue', 'gradient-green', 'gradient-purple', 'gradient-orange', 'gradient-pink', 'gradient-teal'];
+            gradientClasses.forEach(cls => {
+                welcomePage.classList.remove(cls);
+                loginPage.classList.remove(cls);
+            });
+            
+            if (websiteSettings.backgroundType === 'image' && websiteSettings.backgroundImage) {
+                // Use uploaded background image
+                const backgroundStyle = `url('${websiteSettings.backgroundImage}') center/cover no-repeat, linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(55, 48, 163, 0.8) 100%)`;
+                welcomePage.style.background = backgroundStyle;
+                loginPage.style.background = backgroundStyle;
+            } else if (websiteSettings.background === 'custom' && websiteSettings.customGradient) {
+                welcomePage.style.background = websiteSettings.customGradient;
+                loginPage.style.background = websiteSettings.customGradient;
+            } else {
+                welcomePage.classList.add(websiteSettings.background);
+                loginPage.classList.add(websiteSettings.background);
+                welcomePage.style.background = '';
+                loginPage.style.background = '';
+            }
+        }
+        
+        function updateBackgroundPreview() {
+            const preview = document.getElementById('backgroundPreview');
+            
+            if (websiteSettings.backgroundType === 'image' && websiteSettings.backgroundImage) {
+                // Show uploaded background image with overlay
+                const backgroundStyle = `url('${websiteSettings.backgroundImage}') center/cover no-repeat, linear-gradient(135deg, rgba(30, 64, 175, 0.8) 0%, rgba(55, 48, 163, 0.8) 100%)`;
+                preview.style.background = backgroundStyle;
+            } else if (websiteSettings.background === 'custom' && websiteSettings.customGradient) {
+                preview.style.background = websiteSettings.customGradient;
+            } else {
+                // Map background classes to actual gradients
+                const gradientMap = {
+                    'gradient-blue': 'linear-gradient(135deg, #1e40af 0%, #3730a3 100%)',
+                    'gradient-green': 'linear-gradient(135deg, #059669 0%, #047857 100%)',
+                    'gradient-purple': 'linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%)',
+                    'gradient-orange': 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)',
+                    'gradient-pink': 'linear-gradient(135deg, #ec4899 0%, #be185d 100%)',
+                    'gradient-teal': 'linear-gradient(135deg, #0d9488 0%, #0f766e 100%)'
+                };
+                
+                preview.style.background = gradientMap[websiteSettings.background] || gradientMap['gradient-blue'];
+            }
+        }
+        
+        function updateWebsiteTitle() {
+            websiteSettings.mainTitle = document.getElementById('mainTitleInput').value;
+            websiteSettings.subTitle = document.getElementById('subTitleInput').value;
+            websiteSettings.description = document.getElementById('descriptionInput').value;
+            
+            // Update welcome page titles
+            const mainTitleElements = document.querySelectorAll('h1');
+            mainTitleElements.forEach(el => {
+                if (el.textContent.includes('Fisika Learning') || el.textContent.includes('Dashboard')) {
+                    if (!el.textContent.includes('Dashboard')) {
+                        el.textContent = websiteSettings.mainTitle;
+                    }
+                }
+            });
+            
+            // Update subtitles and descriptions
+            const welcomeTexts = document.querySelectorAll('#welcomePage p');
+            if (welcomeTexts.length >= 2) {
+                welcomeTexts[0].textContent = websiteSettings.subTitle;
+                welcomeTexts[1].textContent = websiteSettings.description;
+            }
+            
+            showSuccessMessage('Judul website berhasil diperbarui!');
+        }
+        
+        function resetLogo() {
+            if (confirm('Yakin ingin mereset logo ke default?')) {
+                websiteSettings.logo = '⚛️';
+                websiteSettings.logoType = 'emoji';
+                websiteSettings.logoImage = null;
+                pendingLogoUpload = null;
+                
+                // Hide upload preview
+                document.getElementById('logoUploadPreview').classList.add('hidden');
+                document.getElementById('logoAppliedPreview').classList.add('hidden');
+                document.getElementById('logoFileInput').value = '';
+                
+                updateAllLogos();
+                loadPengaturanData();
+                showSuccessMessage('Logo berhasil direset!');
+            }
+        }
+        
+        function resetBackground() {
+            if (confirm('Yakin ingin mereset background ke default?')) {
+                websiteSettings.background = 'gradient-blue';
+                websiteSettings.backgroundType = 'gradient';
+                websiteSettings.backgroundImage = null;
+                websiteSettings.customGradient = null;
+                pendingBackgroundUpload = null;
+                
+                // Hide upload preview
+                document.getElementById('backgroundUploadPreview').classList.add('hidden');
+                document.getElementById('backgroundAppliedPreview').classList.add('hidden');
+                document.getElementById('backgroundFileInput').value = '';
+                
+                updateAllBackgrounds();
+                updateBackgroundPreview();
+                showSuccessMessage('Background berhasil direset!');
+            }
+        }
+        
+        function resetTitle() {
+            if (confirm('Yakin ingin mereset judul ke default?')) {
+                websiteSettings.mainTitle = 'Fisika Learning';
+                websiteSettings.subTitle = 'Sistem Pembelajaran Fisika Digital';
+                websiteSettings.description = 'Platform pembelajaran modern untuk guru dan siswa';
+                updateWebsiteTitle();
+                loadPengaturanData();
+                showSuccessMessage('Judul berhasil direset!');
+            }
+        }
+        
+        function resetAllSettings() {
+            if (confirm('Yakin ingin mereset SEMUA pengaturan ke default? Tindakan ini tidak dapat dibatalkan!')) {
+                websiteSettings = {
+                    logo: '⚛️',
+                    logoType: 'emoji',
+                    logoImage: null,
+                    background: 'gradient-blue',
+                    backgroundType: 'gradient',
+                    backgroundImage: null,
+                    mainTitle: 'Fisika Learning',
+                    subTitle: 'Sistem Pembelajaran Fisika Digital',
+                    description: 'Platform pembelajaran modern untuk guru dan siswa'
+                };
+                
+                // Clear pending uploads
+                pendingLogoUpload = null;
+                pendingBackgroundUpload = null;
+                
+                // Hide all upload previews
+                document.getElementById('logoUploadPreview').classList.add('hidden');
+                document.getElementById('logoAppliedPreview').classList.add('hidden');
+                document.getElementById('backgroundUploadPreview').classList.add('hidden');
+                document.getElementById('backgroundAppliedPreview').classList.add('hidden');
+                document.getElementById('logoFileInput').value = '';
+                document.getElementById('backgroundFileInput').value = '';
+                
+                updateAllLogos();
+                updateAllBackgrounds();
+                updateWebsiteTitle();
+                loadPengaturanData();
+                showSuccessMessage('Semua pengaturan berhasil direset!');
+            }
+        }
+        
+        // File upload handlers
+        let pendingLogoUpload = null;
+        
+        function previewLogoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validate file size (2MB max)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar! Maksimal 2MB.');
+                event.target.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('File harus berupa gambar (JPG, PNG, GIF, SVG)!');
+                event.target.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                
+                // Store pending upload data
+                pendingLogoUpload = imageData;
+                
+                // Show preview without applying
+                document.getElementById('logoUploadPreview').classList.remove('hidden');
+                document.getElementById('logoPreviewImage').src = imageData;
+                document.getElementById('logoAppliedPreview').classList.add('hidden');
+                
+                showSuccessMessage('Preview logo siap! Klik "Terapkan Logo" untuk menerapkan.');
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function applyLogoUpload() {
+            if (!pendingLogoUpload) {
+                alert('Tidak ada logo untuk diterapkan!');
+                return;
+            }
+            
+            // Apply the logo
+            websiteSettings.logoType = 'image';
+            websiteSettings.logoImage = pendingLogoUpload;
+            
+            // Update all logos
+            updateAllLogos();
+            
+            // Show applied state
+            document.getElementById('logoAppliedPreview').classList.remove('hidden');
+            
+            // Clear pending upload
+            pendingLogoUpload = null;
+            
+            showSuccessMessage('Logo berhasil diterapkan!');
+        }
+        
+        function cancelLogoUpload() {
+            // Clear pending upload
+            pendingLogoUpload = null;
+            
+            // Hide preview
+            document.getElementById('logoUploadPreview').classList.add('hidden');
+            document.getElementById('logoFileInput').value = '';
+            
+            showSuccessMessage('Upload logo dibatalkan.');
+        }
+        
+        let pendingBackgroundUpload = null;
+        
+        function previewBackgroundUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validate file size (5MB max)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('Ukuran file terlalu besar! Maksimal 5MB.');
+                event.target.value = '';
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                alert('File harus berupa gambar (JPG, PNG)!');
+                event.target.value = '';
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const imageData = e.target.result;
+                
+                // Store pending upload data
+                pendingBackgroundUpload = imageData;
+                
+                // Show preview without applying
+                document.getElementById('backgroundUploadPreview').classList.remove('hidden');
+                document.getElementById('backgroundPreviewImage').src = imageData;
+                document.getElementById('backgroundAppliedPreview').classList.add('hidden');
+                
+                showSuccessMessage('Preview background siap! Klik "Terapkan Background" untuk menerapkan.');
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function applyBackgroundUpload() {
+            if (!pendingBackgroundUpload) {
+                alert('Tidak ada background untuk diterapkan!');
+                return;
+            }
+            
+            // Apply the background
+            websiteSettings.backgroundType = 'image';
+            websiteSettings.backgroundImage = pendingBackgroundUpload;
+            
+            // Update all backgrounds
+            updateAllBackgrounds();
+            updateBackgroundPreview();
+            
+            // Show applied state
+            document.getElementById('backgroundAppliedPreview').classList.remove('hidden');
+            
+            // Clear pending upload
+            pendingBackgroundUpload = null;
+            
+            showSuccessMessage('Background berhasil diterapkan!');
+        }
+        
+        function cancelBackgroundUpload() {
+            // Clear pending upload
+            pendingBackgroundUpload = null;
+            
+            // Hide preview
+            document.getElementById('backgroundUploadPreview').classList.add('hidden');
+            document.getElementById('backgroundFileInput').value = '';
+            
+            showSuccessMessage('Upload background dibatalkan.');
+        }
+        
+        function removeUploadedLogo() {
+            if (confirm('Yakin ingin menghapus logo upload?')) {
+                websiteSettings.logoType = 'emoji';
+                websiteSettings.logoImage = null;
+                pendingLogoUpload = null;
+                
+                // Hide preview
+                document.getElementById('logoUploadPreview').classList.add('hidden');
+                document.getElementById('logoAppliedPreview').classList.add('hidden');
+                document.getElementById('logoFileInput').value = '';
+                
+                // Update all logos back to emoji
+                updateAllLogos();
+                
+                showSuccessMessage('Logo upload berhasil dihapus!');
+            }
+        }
+        
+        function removeUploadedBackground() {
+            if (confirm('Yakin ingin menghapus background upload?')) {
+                websiteSettings.backgroundType = 'gradient';
+                websiteSettings.backgroundImage = null;
+                pendingBackgroundUpload = null;
+                
+                // Hide preview
+                document.getElementById('backgroundUploadPreview').classList.add('hidden');
+                document.getElementById('backgroundAppliedPreview').classList.add('hidden');
+                document.getElementById('backgroundFileInput').value = '';
+                
+                // Update all backgrounds back to gradient
+                updateAllBackgrounds();
+                updateBackgroundPreview();
+                
+                showSuccessMessage('Background upload berhasil dihapus!');
+            }
+        }
+        
+        function showSuccessMessage(message) {
+            // Create temporary success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50 bounce-in';
+            successDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <span>✅</span>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(successDiv);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                successDiv.remove();
+            }, 3000);
+        }
+
+        // Close modals when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+                const modals = ['addMateriModal', 'addKelasModal', 'addJurnalModal'];
+                modals.forEach(modalId => {
+                    if (e.target.id === modalId) {
+                        closeModal(modalId);
+                    }
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98648851b488fdf4',t:'MTc1OTA3NjA1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
