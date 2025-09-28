@@ -307,8 +307,6 @@
                 </div>
                 <h1 class="text-4xl font-bold text-white mb-3 slide-up" id="loginTitle">Login</h1>
                 <p class="text-white/80 text-lg slide-up" id="loginSubtitle">Masuk ke sistem</p>
-                
-
             </div>
             
             <form id="loginForm" class="space-y-6 fade-in">
@@ -1415,6 +1413,8 @@
                 loadKelasData();
             } else if (section === 'kehadiran') {
                 loadKehadiranData();
+                // Mulai atau perbarui token saat membuka halaman kehadiran
+                generateToken();
             } else if (section === 'nilai') {
                 loadNilaiData();
             } else if (section === 'jurnal') {
@@ -1981,13 +1981,22 @@
             });
         }
 
-        // Token management
+        // Token management - SISTEM TOKEN BARU
         function generateToken() {
-            currentToken = Math.random().toString(36).substring(2, 8).toUpperCase();
-            document.getElementById('currentToken').textContent = currentToken;
+            // Dapatkan waktu saat ini dalam detik sejak epoch
+            const currentTime = Math.floor(Date.now() / 1000);
             
-            // Reset timer
-            tokenTimer = 30;
+            // Hitung periode token saat ini (setiap 30 detik)
+            const tokenPeriod = Math.floor(currentTime / 30);
+            
+            // Buat token deterministik berdasarkan periode
+            // Ini memastikan token yang sama dihasilkan di semua perangkat pada waktu yang sama
+            const seed = "FISIKA_ABSEN_" + tokenPeriod;
+            currentToken = hashCode(seed).toString().substring(0, 6).toUpperCase();
+            
+            // Hitung sisa waktu dalam periode saat ini
+            tokenTimer = 30 - (currentTime % 30);
+            document.getElementById('currentToken').textContent = currentToken;
             document.getElementById('tokenTimer').textContent = tokenTimer;
             
             // Clear existing interval
@@ -2004,6 +2013,17 @@
                     generateToken(); // Auto-generate new token
                 }
             }, 1000);
+        }
+
+        // Fungsi hash sederhana untuk membuat token deterministik
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32-bit integer
+            }
+            return Math.abs(hash);
         }
 
         // Attendance functions
@@ -2176,8 +2196,15 @@
                 return;
             }
             
-            if (token !== currentToken) {
-                alert('Token tidak valid atau sudah kadaluarsa!');
+            // Validasi token dengan cara yang sama seperti pembuatan token
+            const currentTime = Math.floor(Date.now() / 1000);
+            const tokenPeriod = Math.floor(currentTime / 30);
+            const seed = "FISIKA_ABSEN_" + tokenPeriod;
+            const expectedToken = hashCode(seed).toString().substring(0, 6).toUpperCase();
+            
+            // Periksa apakah token yang dimasukkan cocok dengan token yang diharapkan
+            if (token !== expectedToken) {
+                alert('Token tidak valid atau sudah kadaluarsar!');
                 return;
             }
             
@@ -2190,7 +2217,7 @@
             
             // Record attendance
             const today = new Date().toISOString().split('T')[0];
-            const currentTime = new Date().toLocaleTimeString('id-ID');
+            const currentTimeFormatted = new Date().toLocaleTimeString('id-ID');
             
             // Remove existing attendance for today
             attendanceData = attendanceData.filter(att => 
@@ -2203,7 +2230,7 @@
                 siswaId: student.id,
                 date: today,
                 status: 'hadir',
-                time: currentTime,
+                time: currentTimeFormatted,
                 location: currentLocation
             });
             
@@ -2911,5 +2938,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98648851b488fdf4',t:'MTc1OTA3NjA1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
